@@ -150,8 +150,6 @@ defmodule PhoenixClient.Channel do
 
   @impl true
   def handle_info(%Message{event: "phx_reply", ref: ref} = msg, %{pushes: pushes} = s) do
-    IO.inspect(111111111111111111111111)
-    IO.inspect(msg)
     pushes =
       case Enum.split_with(pushes, &(elem(&1, 1).ref == ref)) do
         {[{from_ref, _push}], pushes} ->
@@ -168,8 +166,6 @@ defmodule PhoenixClient.Channel do
 
   @impl true
   def handle_info(%Message{} = message, %{caller: pid, topic: topic} = state) do
-    IO.inspect(2222222222222222222222222222)
-    IO.inspect(message)
     send(pid, %{message | channel_pid: pid, topic: topic})
     {:noreply, state}
   end
